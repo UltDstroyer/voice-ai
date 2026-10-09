@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+result
+result-*/
+*.wav
+*.mp3
+*.flac
+*.onnx
+*.pt
+*.pth
+*.bin
+.env
+.env.*
+local-config.json
