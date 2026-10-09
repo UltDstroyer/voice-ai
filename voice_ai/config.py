@@ -27,7 +27,7 @@ def private_config_path(path: Path) -> Path:
 def require_loopback(url: str) -> str:
     parsed = urlsplit(url)
     if (parsed.scheme != "http" or parsed.hostname not in ("127.0.0.1", "localhost")
-            or parsed.port not in (11434, None) or parsed.username or parsed.password
+            or parsed.port != 11434 or parsed.username or parsed.password
             or parsed.path != "/api/chat" or parsed.query or parsed.fragment):
         raise ValueError("Ollama URL must be local http://127.0.0.1:11434/api/chat")
     return url

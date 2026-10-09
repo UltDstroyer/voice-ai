@@ -20,7 +20,8 @@ class SettingsTests(unittest.TestCase):
     def test_reject_ollama_remote_host(self):
         for url in ("http://example.com/api/chat",
                     "https://127.0.0.1:11434/api/chat",
-                    "http://127.0.0.1:9911/api/chat"):
+                    "http://127.0.0.1:9911/api/chat",
+                    "http://127.0.0.1/api/chat"):
             with self.subTest(url=url), self.assertRaises(ValueError):
                 require_loopback(url)
 
