@@ -9,7 +9,9 @@ ctx-ext-voice; it does not edit src/ctx or depend on the ctx Python source.
 A versioned ctx invocation provides CTX_EXTENSION_API_VERSION=1,
 CTX_CONTEXT (possibly empty), and CTX_CONFIG_ROOT. The extension checks
 protocol compatibility but does not interpret context identity as an
-authorization token. In v0/1 CTX_CONTEXT is diagnostic metadata only.
+authorization token. In v0/1 CTX_CONTEXT supplies only a validated workspace label to the
+conversation system prompt. It does NOT read context snapshots, infer
+filesystem permissions, or authorize actions.
 
 ## Pipeline
 

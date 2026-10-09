@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+import os
 from unittest.mock import MagicMock, patch
 
 from voice_ai.config import Settings
@@ -36,6 +37,14 @@ class BackendTests(unittest.TestCase):
             with patch("voice_ai.transcribe.subprocess.run", side_effect=fake_run) as run:
                 self.assertEqual(stt.transcribe(b"\x00\x00" * 512), "test transcript")
                 self.assertIsInstance(run.call_args.args[0], list)
+
+    def test_workspace_name_provided_without_file_access(self):
+        with patch.dict(os.environ, {"CTX_CONTEXT": "research"}):
+            bot = OllamaConversation(Settings())
+            self.assertIn("research", bot.messages[0]["content"])
+        with patch.dict(os.environ, {"CTX_CONTEXT": "bad\ninjection"}):
+            bot = OllamaConversation(Settings())
+            self.assertNotIn("injection", bot.messages[0]["content"])
 
     def test_ollama_request_is_local_and_conversation_bounded(self):
         class Response:

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import urllib.request
 from .config import Settings, ollama_options, require_loopback
 
@@ -18,7 +20,13 @@ SYSTEM = (
 class OllamaConversation:
     def __init__(self, settings: Settings):
         self.settings = settings.validate()
-        self.messages = [{"role": "system", "content": SYSTEM}]
+        context = os.environ.get("CTX_CONTEXT", "")
+        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,47}", context):
+            context = ""
+        prompt = SYSTEM
+        if context:
+            prompt += " The current Context Switcher workspace is named " + context + "."
+        self.messages = [{"role": "system", "content": prompt}]
 
     def respond(self, utterance: str) -> str:
         if not utterance.strip():
