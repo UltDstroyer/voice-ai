@@ -33,7 +33,7 @@ conversation messages live only in process memory.
 For the private GitHub repository, clone the development branch using your
 configured GitHub SSH key:
 
-    git clone -b feat/ctx-voice-mvp git@github.com:UltDstroyer/voice-ai.git ~/src/voice-ai
+    git clone git@github.com:UltDstroyer/voice-ai.git ~/src/voice-ai
 
 Option A: develop locally with Python 3.11+ in an environment that supports
 audio and the required Torch/ROCm stack:
