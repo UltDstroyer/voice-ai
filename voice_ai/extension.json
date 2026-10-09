@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "voice",
+  "name": "Local Conversational Voice",
+  "entrypoint": "ctx-ext-voice",
+  "extension_api": 1,
+  "repository": "UltDstroyer/voice-ai",
+  "capabilities": [
+    "speech-to-text",
+    "text-to-speech",
+    "voice-conversation",
+    "barge-in",
+    "local-ollama"
+  ],
+  "lifecycle": "explicit-interactive-only",
+  "requires": [
+    "local-whispercpp-model",
+    "local-ollama",
+    "local-TTS-backend"
+  ],
+  "privacy": "Microphone opens only during ctx voice chat; no background recording."
+}
