@@ -29,6 +29,10 @@ jobs:
         run: nix flake show --show-trace
       - name: Build extension
         run: nix build .#packages.x86_64-linux.default --show-trace
+      - name: Smoke-test packaged ctx extension without microphone access
+        run: |
+          ./result/bin/ctx-ext-voice version
+          ./result/bin/ctx-ext-voice doctor
       - name: Evaluate NixOS module
         run: |
           nix eval --raw --impure --expr '
